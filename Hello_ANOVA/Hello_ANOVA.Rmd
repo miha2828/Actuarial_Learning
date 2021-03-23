@@ -1,0 +1,47 @@
+---
+title: "Hello_ANOVA"
+author: "Michael Baznik"
+date: "March 23, 2021"
+output: html_document
+---
+
+**Goal:** Motivate the use of the F-test in ANOVA.  
+
+**1. Conceptual Overview**  
+  + ANOVA = analysis of variance  
+  + ANOVA seeks to test for the equality of *means*  
+  + Aside 1: can be viewed as generalization of 2-sample t-test  
+  + Aside 2: can be viewed as special case of multiple regression, where our k groups are coded as (k-1) binary variables (assuming we include intercept)  
+  + ANOVA tests equality of means by *computing variance two different ways*  
+  + ANOVA compares the two estimations of variance to derive indication for whether or not means are equal.  
+  
+**2. Why F-Test?**  
+  + Null hypothesis: All group means are equal  
+  + Strategy: Compute a statistic of quotient of two estimated variances:  
+  $$ TestStat = \frac{(Var Estimated Method_1)}{(Var Estimated Method_2)} $$  
+  + We'll discuss 2 estimation methods below    
+  + Here we'll discuss formation of F statistic  
+  + Fact 1:   
+  $$ F_{p,q} = \frac{\frac{\chi^2_p}{p}}{\frac{\chi^2_q}{q}} $$  
+  + Fact 2: when estimating a variance with n obs:
+  $$ s^2 = \sigma^2 * \chi^2_n / (n-1) $$  
+  + Thus, if we estimate the variance with *p* obs in numerator and with *q* obs in denominator, we get    
+  $$ TestStat =  \frac{\frac{\chi^2_{p-1}}{p-1}}{\frac{\chi^2_{q-1}}{q-1}}$$
+  + Which is exactly an F random var with (p-1), (q-1) num/denom dof.
+  
+  
+**3. Why is variance distributed $\chi^2$ ?**  
+  + Numerator: we have *k* groups.  Under null that all means are equal to the grand/overall mean, then each group's sample mean will be normally distributed  
+  + Thus the square of each sample mean from overall mean will be distributed $\chi^2$ (times the variance)  
+  + Denominator: we take each obs and take its square diff from overall mean.  Distribution analogous to above.  
+  
+**3.5 Intuition**  
+  + When null is **"true"**, sample means likely very close together.  
+  + Thus, numerator will be small  
+  + Due to dispersion of individual obs, denominator likely much larger  
+  + Likely get small value of F, and tend to fail to reject  
+  + When null **"false"**, sample means likely far apart  
+  + Thus, numerator much larger relative to denominator  
+  + Likely get larger value of F, and likely to reject.
+  
+**4. Sample Problem**  
